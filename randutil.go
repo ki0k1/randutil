@@ -22,23 +22,23 @@ const (
 var MinMaxError = errors.New("Min cannot be greater than max.")
 
 // IntRange returns a random integer in the range from min to max.
-func IntRange(min, max int) (int, error) {
+func IntRange(min, max int) (int) {
 	var result int
 	switch {
 	case min > max:
 		// Fail with error
-		return result, MinMaxError
+		return result
 	case max == min:
 		result = max
 	case max > min:
 		maxRand := max - min
 		b, err := rand.Int(rand.Reader, big.NewInt(int64(maxRand)))
 		if err != nil {
-			return result, err
+			return result
 		}
 		result = min + int(b.Int64())
 	}
-	return result, nil
+	return result
 }
 
 // String returns a random string n characters long, composed of entities
